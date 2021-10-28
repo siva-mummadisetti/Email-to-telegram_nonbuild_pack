@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" href="{% static 'Email/icon.png' %}">
+        <title>{% block title %}E2T{% endblock %}</title>
+        {% block head %}
+
+        {% endblock %}
+        <style>
+            body{
+                margin: 0;
+                padding: 0;
+            }
+            #logo{
+                width: 180px;
+                height: 180px;
+            }
+            #nav-list {
+                list-style-type: none;
+                }
+            .navigation-item {
+                display: inline-block;
+                }
+            .nav-link {
+                color: #000;
+                font-weight: 500;
+                font-family: "Indie Flower", cursive;
+                font-size: 25px;
+                text-decoration: none;
+                }
+            .nav-link:hover {
+                color: #CD0000;
+                }
+            .li-div{
+                float: left;
+                padding-right: 40px;
+            }
+            #parent{
+                float: left;
+            }
+            #c1{
+                float: left;
+                margin-left: 10px;
+            }
+            #c2{
+                margin-left: 750px;
+                margin-top: 40px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="parent">
+              <div id="c1"><a href="{% url 'index' %}"><img id="logo" src="{% static 'Email/logo.png' %}" alt=""></a></div>
+            <div id="c2">
+              <ul id="nav-list">
+                <div class="li-div">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">E2T Automation</a></li>
+                </div>
+                <div class="li-div">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                </div>
+
+                {% if user.is_authenticated %}
+                    <div class="li-div">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}" style="border: #000 solid 2px; border-radius: 5px">Log Out</a></li>
+                    </div>
+                    <div class="li-div" style="width: 146.41px; height:52.8px;">
+
+                    </div>
+                {% else %}
+                    <div class="li-div">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                    </div>
+                    <div class="li-div">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}" style="border: #000 solid 2px; border-radius: 5px;">Log In</a></li>
+                    </div>
+                {% endif %}
+              </ul>
+            </div>
+        </div>
+        {% block body %}
+
+        {% endblock %}
+    </body>
+</html>

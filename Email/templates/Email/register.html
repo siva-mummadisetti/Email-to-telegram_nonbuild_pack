@@ -1,0 +1,91 @@
+{% extends "Email/layout.html" %}
+
+{% block title %}Register • E2T{% endblock %}
+
+{% block head %}
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+    #par{
+        margin-left: 26%;
+        clear:left; /* undo the default float left stlye for preceeding element */
+    }
+    #ip{
+        width: 700px;
+    }
+    #at{
+        width: 40px;
+        float: left;
+    }
+    #ip3{
+        width: 660px;
+    }
+    #ip4{
+        margin-left: 615px;
+    }
+    #info{
+        font-family: sans-serif;
+    }
+    #info-title{
+        text-decoration: underline;
+        font-size:large;
+        color:darkslategray;
+    }
+    #info{
+        margin-left: 15px;
+    }
+    </style>
+{% endblock %}
+
+{% block body %}
+        <div id = "par">
+            <form action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+        
+            <h2>Register Her<span style="color: red; font-family: cursive">e.</span></h2>
+            <div class="form-group">
+                <input type="text" id="ip" class="form-control" placeholder="Username" name="username">
+            </div>
+            <div class="form-group">
+                <input type="password" id="ip" class="form-control" placeholder="Password" name="password">
+            </div>
+            <div class="form-group">
+                <input type="password" id="ip" class="form-control" placeholder="Confirm password" name="confirm_password">
+            </div>
+            <div class="form-group">
+                <input type="email" id="ip" class="form-control" placeholder="Email address" name="email_id">
+                <small id="emailHelp" class="form-text text-muted">From this email address, the mails will be fetched 👆👆👆</small>
+            </div>
+            <div class="form-group">
+                <div id = "at" class="input-group-text">@</div>
+                <div>
+                <input type="text" id="ip3" class="form-control" placeholder="Telegram Username" name="telegram_id">
+                <small id="emailHelp" class="form-text text-muted"><span style="color: red;">Please refer to the below info before hitting register.</span></small>
+                </div>
+            </div>
+                <div>
+                    <input id="ip4" class="btn btn-info" type="submit" value="Register">
+                </div>
+            </form>
+        </div>
+    <br>
+    {% if message1 %}
+        <div class="alert alert-danger" role="alert" style="text-align: center;">
+            {{message1}}
+        </div>
+    {% endif %}
+    {% if message2 %}
+        <div class="alert alert-primary" role="alert" style="text-align: center;">
+            {{message2}}
+        </div>
+    {% endif %}
+    <br>
+    <div id="info">
+        <strong id="info-title">First things need to be done before registering</strong>
+        <ol>
+            <li>To direct email notifications to your Telegram, you need to <span style="font-weight: bold;">authorize CallMeBot</span> <a href="https://api2.callmebot.com/txt/login.php">using this link</a> or you can start the bot by sending <span style="background-color:floralwhite; font-weight: bold;">/start</span> to <a href="https://t.me/CallMeBot_txtbot">@CallMeBot_txtbot</a> (Telegram ID).</li>
+            <li>In case if you what email notifications from Gmail you have to give <span style="font-weight: bold;">access to Less Secure Apps</span> <a href="https://myaccount.google.com/lesssecureapps">use this URL to do that</a>. This step can be skipped if you are using any of the following email service providers Outlook, Yahoo...</li>
+            <li>Know about everything...<a href="{% url 'about' %}"> click here to do that</a></li>
+            <li>Give your credentials correctly and follow the instructions while creating an account. Failing to do so the App will give errors.</li>
+        </ol>
+    </div>
+{% endblock %}

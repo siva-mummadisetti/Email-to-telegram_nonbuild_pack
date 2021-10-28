@@ -1,0 +1,63 @@
+{% extends "Email/layout.html" %}
+
+{% block title %}About • E2T{% endblock %}
+
+{% block head %}
+    <style>
+            #outer{
+                clear:left; /* If the element is styled with float:left; then all of the below element by default get the same style (float left), to avoid this use clear: left; for the below element then default style for all the below will undone */
+                font-family: cursive;
+                width: 65%;
+                margin-left: 18%;
+                background-color: aliceblue;
+                border-left: 2px solid black;
+                border-radius: 100px;
+            }
+            #inner{
+                width: 60%;
+                margin-left: 23%;
+            }
+            #title{
+                text-align: center;
+                text-decoration: underline;
+            }
+            #h1,#h2,#h3,#h4{
+                text-decoration: underline;
+                color: black;
+            }
+            #greet{
+                text-align: center;
+                font-family: cursive;
+                width: 100%;
+                bottom: 5px;
+                position:relative;
+            }
+    </style>
+{% endblock %}
+{% block body %}
+<div id="outer">
+    <div id="inner" id="clear">
+        <br> 
+        <h1 id="title">About The Project ‘E2T’</h1>
+        <p id="p1">
+            E2T is short for Email to Telegram. The main theme of this project is giving alerts of your emails in telegram.
+            The key player in this project is API. We have used the ‘EasyIMAP’ API for fetching unread emails from your inbox. This API can fetch the mails from the inboxes of any email service provider. To send these emails as alerts to Telegram an API is required so, we used ‘CallMeBot’ API.
+            Fetching of emails will be done at the backend and the API call to CallMeBot is made at the frontend.
+        </p>
+        <h2 id="h1">Navigation bar items</h2>
+        <a href="{% url 'index' %}"><h3 id="h2">E2T Automation</h3></a>
+        <p id="p2">You can see this page only when you logged in, stop button on this page end the EtoT automation. The check for any unread mails and notifying if any via Telegram will be done automatically for every 1 minute.</p>
+        <a href="{% url 'register' %}"><h3 id="h3">Register</h3></a>
+        <p id="p3">Using the ‘Username’ and ‘Password’ fields you can create an account here. The value you are giving via the ‘Email address’ field will tell from where the mails have to fetch from, ‘Telegram Username’ is your Telegram username that is registered with CallMeBot API. On creating an account by following the instructions you are good to go with login and leverage this project.</p>
+        <a href="{% url 'login' %}"><h3 id="h4">Login</h3></a>
+        <p id="p4">All the registered users can log in. The email password you enter during login will be deleted when you hit the logout.</p>
+        <br>
+    </div>
+</div>
+        {% if user.is_authenticated %}
+            <div id = "greet">
+                <br>
+                <h3><span style="color:grey; font-size: medium;">Signed in as </span>&nbsp;&nbsp;&nbsp;{{user.username}} 🙂</h3>     
+            </div>
+        {% endif %}
+{% endblock %}
